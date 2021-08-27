@@ -4,7 +4,7 @@ class PrefecturesController < ApplicationController
   # GET /prefectures
   def index
     @prefectures = Prefecture.all
-
+    @prefectures = @prefectures.where(code: params[:code]) if params[:code].present?
     render json: @prefectures
   end
 
