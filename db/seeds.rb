@@ -5,7 +5,6 @@
 #
 #   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
 #   Character.create(name: 'Luke', movie: movies.first)
-
 names = %w(
   北海道
   青森県
@@ -156,10 +155,19 @@ romajis = %w(
   okinawa
 )
 
+area_names = %w(北海道 北陸 関東 中部 近畿 中国 四国 九州 沖縄)
+area_count = [1, 6, 7, 9, 7, 5, 4, 7, 1]
+
 codes = [*1..47]
 
-prefectures = codes.zip(names, kanas, romajis)
+p = codes.zip(names, kanas, romajis)
 
-prefectures.each do |p|
-  Prefecture.create!(code: p[0], name: p[1], kana: p[2], romaji: p[3])
+count = 0
+
+area_names.each.with_index(1) do |name, i|
+  area = Area.create!(name: name)
+  area_count[i-1].times do
+    Prefecture.create!(code: p[count][0], name: p[count][1], kana: p[count][2], romaji: p[count][3], area_id: area.id)
+    count += 1
+  end
 end

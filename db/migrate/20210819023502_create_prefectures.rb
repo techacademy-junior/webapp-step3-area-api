@@ -5,8 +5,9 @@ class CreatePrefectures < ActiveRecord::Migration[6.1]
       t.string :name
       t.string :kana
       t.string :romaji
-
+      t.references :area
       t.timestamps
+
     end
   end
 end

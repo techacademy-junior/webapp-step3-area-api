@@ -1,5 +1,8 @@
 Rails.application.routes.draw do
-  root 'prefectures#index'
-  resources :prefectures
-  # For details on the DSL available within this file, see https://guides.rubyonrails.org/routing.html
+  namespace 'api' do
+    namespace 'v1' do
+      resources :prefectures, only: [:index]
+      resources :areas, only: [:index]
+    end
+  end
 end

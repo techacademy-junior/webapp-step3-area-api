@@ -10,18 +10,26 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_08_27_013725) do
+ActiveRecord::Schema.define(version: 2021_08_19_023502) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "areas", force: :cascade do |t|
+    t.string "name"
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+  end
 
   create_table "prefectures", force: :cascade do |t|
     t.integer "code"
     t.string "name"
     t.string "kana"
     t.string "romaji"
+    t.bigint "area_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
+    t.index ["area_id"], name: "index_prefectures_on_area_id"
   end
 
 end
